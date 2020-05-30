@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Żądanie potwierdzenia kwarantanny</title>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; color: #202838">
+    <div style="width: 100%; height: 120px; background-color: #ff5333; text-align: left;">
+        <img th:src="@{http://51.83.131.71:8080/images/covid19.logo.png}"/>
+    </div>
+    <h2>Żądanie potwierdzenia kwarantanny</h2>
+
+    <p th:text="|Drogi ${ticket.quarantine.user.firstName} ${ticket.quarantine.user.lastName}|"></p>
+    <p>UWAGA! W Twojej aplikacja pojawiło się nowe żądanie potwierdzenia kwarantanny. Uruchom aplikację i
+        postępuj zgodnie ze wskazówkami.</p>
+    <p>Pospiesz się, masz tylko 10 minut na realizację tej operacji.</p>
+    <p th:text="|Zlecenie zostało wygenerowane ${#temporals.format(ticket.created, 'yyyy-MM-dd HH:mm')}|"></p>
+
+    <p th:text="|Twoja kwarantanna zakończy się: ${#temporals.format(ticket.quarantine.endDate, 'yyyy-MM-dd HH:mm')}|"></p>
+
+    <p>--</p>
+    <p>Pozdrawiamy.</p>
+    <p>Zespół S.A.M.</p>
+
+</body>
+</html>

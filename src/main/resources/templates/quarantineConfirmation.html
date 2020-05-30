@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rozpoczęcie kwarantanny</title>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; color: #202838">
+    <div style="width: 100%; height: 120px; background-color: #ff5333; text-align: left;">
+        <img th:src="@{http://51.83.131.71:8080/images/covid19.logo.png}"/>
+    </div>
+    <h2>Rozpoczęcie kwarantanny</h2>
+
+    <p th:text="|Drogi ${quarantine.user.firstName} ${quarantine.user.lastName}|"></p>
+    <p>Z przyjemnością informujemy Cię, że Twoja kwarantanna w systemie S.A.M rozpoczęła się.</p>
+
+    <p th:text="|Data rozpoczęcia: ${#temporals.format(quarantine.startDate, 'yyyy-MM-dd HH:mm')}|"></p>
+    <p th:text="|Data zakończenia: ${#temporals.format(quarantine.endDate, 'yyyy-MM-dd HH:mm')}|"></p>
+
+    <p>Otwórz swoją aplikację i potwierdź. Pamiętaj, potwierdzenie kwarantanny musisz przeprowadzić
+        z miejsca, w którym będziesz przebywał podczas kwarantanny.</p>
+    <p>Każdego dnia kwarantanny otrzymasz powiadomienie wysłane do aplikacji na Twoim telefonie.
+        W ciągu 5 minut od otrzymania powiadomienia musisz wykonać swoje zdjęcie i przesłać do nas.
+        Wraz ze zdjęciem przesłany zostanie tag GPS, który pozwoli określić Twoje położenie.</p>
+    <p>Jeżeli nie masz jeszcze aplikacji lub nie znasz swojego pinu sprawdź poprzednie wiadomości.</p>
+
+    <p>--</p>
+    <p>Pozdrawiamy.</p>
+    <p>Zespół S.A.M.</p>
+
+</body>
+</html>

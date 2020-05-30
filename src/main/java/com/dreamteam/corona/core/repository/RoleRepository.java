@@ -1,0 +1,10 @@
+package com.dreamteam.corona.core.repository;
+
+import com.dreamteam.corona.core.model.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoleRepository extends JpaRepository<Role, Long> {
+
+    Role findByName(String name);
+
+}

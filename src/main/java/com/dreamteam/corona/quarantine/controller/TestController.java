@@ -1,28 +1,46 @@
 package com.dreamteam.corona.quarantine.controller;
 
-import com.dreamteam.corona.quarantine.service.PushNotificationService;
+import com.dreamteam.corona.quarantine.model.Quarantine;
+import com.dreamteam.corona.quarantine.model.Ticket;
+import com.dreamteam.corona.quarantine.repository.QuarantineRepository;
+import com.dreamteam.corona.quarantine.repository.TicketRepository;
+import com.dreamteam.corona.core.service.PushNotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-
+@AllArgsConstructor
 public class TestController {
 
     private final String TOPIC = "topic123";
     private final PushNotificationService pushNotificationService;
+    private final QuarantineRepository quarantineRepository;
+    private final TicketRepository ticketRepository;
 
-    public TestController(PushNotificationService pushNotificationService) {
-        this.pushNotificationService = pushNotificationService;
+    @Transactional
+    @GetMapping("/reset")
+    Boolean resetApp() {
+
+        List<Ticket> tickets = ticketRepository.findAll();
+        for(Ticket ticket : tickets){
+            ticketRepository.delete(ticket);
+        }
+        List<Quarantine> quarantines = quarantineRepository.findAll();
+        for(Quarantine quarantine : quarantines) {
+            quarantineRepository.delete(quarantine);
+        }
+
+        return true;
     }
 
     @RequestMapping(value = "/send", method = RequestMethod.GET, produces = "application/json")

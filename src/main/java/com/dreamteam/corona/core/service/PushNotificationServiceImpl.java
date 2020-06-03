@@ -1,6 +1,5 @@
-package com.dreamteam.corona.quarantine.service;
+package com.dreamteam.corona.core.service;
 
-import com.dreamteam.corona.core.service.EmailServiceImpl;
 import com.dreamteam.corona.quarantine.model.HeaderRequestInterceptor;
 import com.dreamteam.corona.quarantine.model.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,8 +7,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -57,6 +54,8 @@ public class PushNotificationServiceImpl implements PushNotificationService {
 
         ObjectNode data = mapper.createObjectNode();
         data.put("TicketToken", ticket.getToken().toString());
+        data.put("RequestDate", ticket.getCreated().toString());
+        logger.info("Data tickecie: " + ticket.getCreated().toString());
 
         body.set("notification", notification);
         body.set("data", data);

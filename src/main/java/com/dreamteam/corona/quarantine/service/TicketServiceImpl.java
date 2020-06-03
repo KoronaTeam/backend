@@ -1,7 +1,7 @@
 package com.dreamteam.corona.quarantine.service;
 
-import com.dreamteam.corona.core.model.User;
 import com.dreamteam.corona.core.service.EmailService;
+import com.dreamteam.corona.core.service.PushNotificationService;
 import com.dreamteam.corona.quarantine.exception.TicketNotFoundException;
 import com.dreamteam.corona.quarantine.model.Quarantine;
 import com.dreamteam.corona.quarantine.model.Ticket;
@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -7,6 +7,7 @@ import com.dreamteam.corona.quarantine.mapper.QuarantineMapper;
 import com.dreamteam.corona.quarantine.model.Quarantine;
 import com.dreamteam.corona.quarantine.service.QuarantineService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -41,6 +42,13 @@ public class QuarantineController {
     @PostMapping("/quarantines/start")
     QuarantineDto startQuarantine(@RequestBody QuarantineStarterDto inputQuarantine) {
         User user = userService.getUserByUsername(inputQuarantine.getPhone());
+
+        // in production should be done differently. first login to service, sent
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (passwordEncoder.encode(inputQuarantine.getPassword()) != user.getPassword() ) {
+
+        }
+
         Quarantine quarantine = quarantineService.findActiveQuarantineForUser(user);
         quarantine.setLatitude(inputQuarantine.getLocation().getLatitude());
         quarantine.setLongitude(inputQuarantine.getLocation().getLongitude());

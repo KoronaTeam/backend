@@ -1,4 +1,4 @@
-package com.dreamteam.corona.quarantine.service;
+package com.dreamteam.corona.core.service;
 
 import com.dreamteam.corona.quarantine.model.Ticket;
 import org.springframework.http.HttpEntity;

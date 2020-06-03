@@ -4,7 +4,7 @@ import com.dreamteam.corona.quarantine.dto.EvidenceDto;
 import com.dreamteam.corona.quarantine.mapper.TicketMapper;
 import com.dreamteam.corona.quarantine.model.Ticket;
 import com.dreamteam.corona.quarantine.dto.TicketDto;
-import com.dreamteam.corona.quarantine.service.FileService;
+import com.dreamteam.corona.core.service.FileService;
 import com.dreamteam.corona.quarantine.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.io.IOUtils;

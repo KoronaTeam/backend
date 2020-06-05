@@ -17,7 +17,7 @@ import java.util.LinkedHashSet;
 public class User implements UserDetails {
 
     public static final int USER_MAX_LENGTH = 50;
-    public static final int USER_MIN_LENGTH = 5;
+    public static final int USER_MIN_LENGTH = 2;
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)

@@ -49,8 +49,8 @@ public class PushNotificationServiceImpl implements PushNotificationService {
         body.put("priority", "high");
 
         ObjectNode notification = mapper.createObjectNode();
-        notification.put("title", "COVID Notification");
-        notification.put("body", "Ticket request.");
+        notification.put("title", "S.A.M-powiadomienie");
+        notification.put("body", "Żądanie potwierdzenia kwarantanny");
 
         ObjectNode data = mapper.createObjectNode();
         data.put("TicketToken", ticket.getToken().toString());

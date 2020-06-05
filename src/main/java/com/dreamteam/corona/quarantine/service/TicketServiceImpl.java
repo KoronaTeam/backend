@@ -76,8 +76,8 @@ public class TicketServiceImpl implements TicketService {
 
     public void prepareTicketForAllSendNotification(int ticketsDaily, int taskFrequencyInMinutes, int taskEndHour) {
 
-        List<Quarantine> quarantines = quarantineRepository.findAllByActiveTrue();
-        List<Quarantine> notRealizedQuarantines = quarantines.stream()
+        List<Quarantine> activeQuarantines = quarantineRepository.findAllByActiveTrue();
+        List<Quarantine> notRealizedQuarantines = activeQuarantines.stream()
                 .filter(q -> q.ticketsToday() < ticketsDaily && q.getPushToken() != null)
                 .collect(Collectors.toList());
 
@@ -85,7 +85,7 @@ public class TicketServiceImpl implements TicketService {
 
         Long numOfRealized = notRealizedQuarantines.stream()
                 .mapToLong(Quarantine::ticketsToday).sum();
-        Long numOfLeftTickets = quarantines.size() * ticketsDaily - numOfRealized;
+        Long numOfLeftTickets = activeQuarantines.size() * ticketsDaily - numOfRealized;
 
         int hourNow = LocalDateTime.now().getHour();
         int tasksLeft = (taskEndHour - hourNow) * 60 / taskFrequencyInMinutes;
@@ -99,7 +99,7 @@ public class TicketServiceImpl implements TicketService {
                 if (notRealizedQuarantines.size()  < 2 ) {
                     n = 0;
                 } else {
-                    n = rand.nextInt(notRealizedQuarantines.size() - 1);
+                    n = rand.nextInt(notRealizedQuarantines.size());
                 }
 
                 Quarantine q = notRealizedQuarantines.get(n);
@@ -126,6 +126,7 @@ public class TicketServiceImpl implements TicketService {
         ticket.setCreated(LocalDateTime.now());
         ticket = save(ticket);
 
+        log.info("Send inforamtion to: {} {}", ticket.getQuarantine().getUser().getId(), ticket.getQuarantine().getUser().getEmail());
         emailService.sendTicketOrder(ticket);
         pushNotificationService.sendTicketOrder(ticket);
     }

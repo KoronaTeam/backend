@@ -24,4 +24,6 @@ public interface QuarantineRepository extends JpaRepository<Quarantine, Long> {
     Optional<Quarantine> findByUserAndActiveTrue(User user);
 
     List<Quarantine> findAllByActiveTrue();
+
+    Long countByUser(User user);
 }

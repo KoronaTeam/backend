@@ -11,6 +11,7 @@ public interface QuarantineService {
     Quarantine save(Quarantine quarantine);
     Quarantine findActiveQuarantineForUser(User user);
 
+
     Quarantine startQuarantineSendConfirmation(Quarantine quarantine);
 
     List<Quarantine> prepareListOfNeededTickets(Integer ticketsDaily);

@@ -3,6 +3,7 @@ package com.dreamteam.corona.core.dto;
 import com.dreamteam.corona.core.model.Role;
 import com.dreamteam.corona.core.model.User;
 import com.dreamteam.corona.core.validator.EmailValidator;
+import com.dreamteam.corona.quarantine.dto.QuarantineDto;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,6 +42,8 @@ public class UserDto {
     @NotNull
     @Length(min = User.USER_MIN_LENGTH, max = User.USER_MAX_LENGTH)
     private String lastName;
+
+    private QuarantineDto quarantine;
 
     private boolean enabled;
 

@@ -1,6 +1,7 @@
 package com.dreamteam.corona.core.model;
 
 import com.dreamteam.corona.core.validator.EmailValidator;
+import com.dreamteam.corona.quarantine.model.Quarantine;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
@@ -68,6 +69,9 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles = new LinkedHashSet<>();
+
+    @OneToOne(mappedBy = "user")
+    private Quarantine quarantine;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

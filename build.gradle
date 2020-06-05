@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.dreamteam'
-version = '0.0.17-SNAPSHOT'
+version = '0.0.19-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {

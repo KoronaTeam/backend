@@ -27,19 +27,19 @@ public class QuarantineController {
     @GetMapping("/quarantines/{id}")
     QuarantineDto getOneQuarantine(@PathVariable Long id) {
         Quarantine quarantine = quarantineService.findById(id);
-        QuarantineDto quarantineDto = quarantineMapper.quarantineToFlatDto(quarantine);
+        QuarantineDto quarantineDto = quarantineMapper.quarantineToFullDto(quarantine);
 
         return quarantineDto;
     }
 
-    @GetMapping("/quarantines/")
+    @GetMapping("/quarantines")
     List<QuarantineDto> getAllQuarantines() {
        List<Quarantine> quarantines = quarantineRepository.findAll();
        return quarantineMapper.quarantinesToFlatDtos(quarantines);
     }
 
 
-    @PostMapping("/quarantines/")
+    @PostMapping("/quarantines")
     QuarantineDto addNewQuarantine(@RequestBody QuarantineAddDto inputQuarantine) {
 
         User user = userService.getUserById(inputQuarantine.getUserId());
@@ -56,7 +56,7 @@ public class QuarantineController {
 
         quarantine = quarantineService.startQuarantineSendConfirmation(quarantine);
 
-        return quarantineMapper.quarantineToFlatDto(quarantine);
+        return quarantineMapper.quarantineToFullDto(quarantine);
     }
 
     @PostMapping("/quarantines/start")
@@ -76,6 +76,6 @@ public class QuarantineController {
 
         quarantine = quarantineService.save(quarantine);
 
-        return quarantineMapper.quarantineToFlatDto(quarantine);
+        return quarantineMapper.quarantineToFullDto(quarantine);
     }
 }
